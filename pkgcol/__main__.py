@@ -29,7 +29,7 @@ def get_options():
                         default=[]
                         )
 
-    parser.add_argument('-c', '--clean_after_deps',
+    parser.add_argument('-c', '--clean',
                         action='store_true',
                         required=False,
                         default=False
@@ -64,21 +64,21 @@ def main():
         organization_name = repo_name.split('/')[0]
         package_json_name = package_json.name()
         repo_package_name = package_json_name
-
         if not repo_package_name:
             repo_package_name = repo_name
         elif repo_package_name.find(organization_name) < 0:
             repo_package_name = f'@{organization_name}/{package_json_name}'
 
         dict[repo_package_name] = package_json.dependencies_all()
-        if args.clean_after_deps:
+
+        if args.clean:
             shutil.rmtree(WORK)
 
     filter_words = args.filter_words
 
     graph = DependencyGraph(dict=dict)
     graph.data_setting(filter_words=filter_words)
-    graph.graph_setting(scale_num=1)
+    graph.graph_setting(scale_num=2)
     graph.show(file_path='dependency_graph.html')
     return 0
 

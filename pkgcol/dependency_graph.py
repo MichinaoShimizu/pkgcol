@@ -10,9 +10,13 @@ class DependencyGraph:
     def __init__(self, dict):
         self.dict = dict
         self.g = nx.DiGraph()
-        self.net = Network(notebook=True, directed=True, layout=None,
-                           bgcolor='#FFFFFF', font_color='#000000',
-                           height='100%', width='100%',
+        self.net = Network(notebook=False,
+                           directed=True,
+                           layout='hierarchical',
+                           bgcolor='#FFFFFF',
+                           font_color='#000000',
+                           height='100%',
+                           width='100%',
                            heading='Dependency Graph')
 
     def show(self, file_path):
