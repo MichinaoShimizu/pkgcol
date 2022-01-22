@@ -54,23 +54,13 @@ def main():
         logger.info(f'target:{repo_name}')
         directory_path = f'{WORK}/{repo_name}'
         if not args.skip_repository_setting:
-            git = GitControl(directory=directory_path,
-                             repository_name=repo_name)
+            git = GitControl(directory=directory_path, repository=repo_name)
             git.clone()
             git.pull()
 
         package_json_path = f'{directory_path}/package.json'
         package_json = PackageJson(file_path=package_json_path)
-        organization_name = repo_name.split('/')[0]
-        package_json_name = package_json.name()
-        repo_package_name = package_json_name
-        if not repo_package_name:
-            repo_package_name = repo_name
-        elif repo_package_name.find(organization_name) < 0:
-            repo_package_name = f'@{organization_name}/{package_json_name}'
-
-        dict[repo_package_name] = package_json.dependencies_all()
-
+        dict[repo_name] = package_json.dependencies_all()
         if args.clean:
             shutil.rmtree(WORK)
 

@@ -12,7 +12,7 @@ class DependencyGraph:
         self.g = nx.DiGraph()
         self.net = Network(notebook=False,
                            directed=True,
-                           layout='hierarchical',
+                           layout=None,
                            bgcolor='#FFFFFF',
                            font_color='#000000',
                            height='100%',
