@@ -13,7 +13,7 @@ logger = get_module_logger(__name__)
 
 
 def get_options():
-    description = ''
+    description = 'Visualize repository and package dependencies'
     parser = ArgumentParser(description=description)
     parser.add_argument('-r', '--repository_names',
                         action='store',
@@ -54,10 +54,8 @@ def main():
         logger.info(f'target:{repo_name}')
         directory_path = f'{WORK}/{repo_name}'
         if not args.skip_repository_setting:
-            git = GitControl(
-                directory=directory_path,
-                repository_name=repo_name
-            )
+            git = GitControl(directory=directory_path,
+                             repository_name=repo_name)
             git.clone()
             git.pull()
 
@@ -80,7 +78,7 @@ def main():
 
     graph = DependencyGraph(dict=dict)
     graph.data_setting(filter_words=filter_words)
-    graph.graph_setting(scale_num=3)
+    graph.graph_setting(scale_num=1)
     graph.show(file_path='dependency_graph.html')
     return 0
 
