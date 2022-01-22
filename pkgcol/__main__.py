@@ -54,16 +54,23 @@ def main():
         logger.info(f'target:{repo_name}')
         directory_path = f'{WORK}/{repo_name}'
         if not args.skip_repository_setting:
-            git = GitControl(directory=directory_path, repo_name=repo_name)
+            git = GitControl(
+                directory=directory_path,
+                repository_name=repo_name
+            )
             git.clone()
             git.pull()
 
         package_json_path = f'{directory_path}/package.json'
         package_json = PackageJson(file_path=package_json_path)
-        org_name = repo_name.split('/')[0]
-        repo_package_name = package_json.name()
-        if repo_package_name.find(org_name) < 0:
-            repo_package_name = f'@{org_name}/{package_json.name()}'
+        organization_name = repo_name.split('/')[0]
+        package_json_name = package_json.name()
+        repo_package_name = package_json_name
+
+        if not repo_package_name:
+            repo_package_name = repo_name
+        elif repo_package_name.find(organization_name) < 0:
+            repo_package_name = f'@{organization_name}/{package_json_name}'
 
         dict[repo_package_name] = package_json.dependencies_all()
         if args.clean_after_deps:
@@ -74,16 +81,16 @@ def main():
     graph = DependencyGraph(dict=dict)
     graph.data_setting(filter_words=filter_words)
     graph.graph_setting(scale_num=3)
-    graph.output(file_path='dependency_graph.html')
+    graph.show(file_path='dependency_graph.html')
     return 0
 
 
 if __name__ == '__main__':
-    # try:
-    exit_code = main()
-    exit(exit_code)
-    # except KeyboardInterrupt:
-    #     exit(1)
-    # except Exception as e:
-    #     logger.error(e)
-    #     exit(1)
+    try:
+        exit_code = main()
+        exit(exit_code)
+    except KeyboardInterrupt:
+        exit(1)
+    except Exception as e:
+        logger.error(e)
+        exit(1)

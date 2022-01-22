@@ -17,9 +17,10 @@ class DependencyGraph:
             heading='Dependency Graph'
         )
 
-    def output(self, file_path):
+    def show(self, file_path):
+        self.net.show(file_path)
         logger.info(file_path)
-        return self.net.show(file_path)
+        return 0
 
     def data_setting(self, filter_words):
         for repo_name in self.dict.keys():
@@ -32,7 +33,8 @@ class DependencyGraph:
                     nx.add_path(self.g, [repo_name, package_name])
 
     def graph_setting(self, scale_num):
-        node_scale = dict(self.g.degree)
-        node_scale.update((x, scale_num * y) for x, y in node_scale.items())
-        nx.set_node_attributes(self.g, node_scale, 'size')
+        # node_scale = dict(self.g.degree)
+        # node_scale.update((x, scale_num * y) for x, y in node_scale.items())
+        # nx.set_node_attributes(self.g, node_scale, 'size')
         self.net.from_nx(self.g)
+        # self.net.show_buttons(True)
