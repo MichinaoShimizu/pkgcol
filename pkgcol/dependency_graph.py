@@ -3,8 +3,6 @@ import networkx as nx
 from pyvis.network import Network
 from logger import get_module_logger
 
-logger = get_module_logger(__name__)
-
 
 class DependencyGraph:
     def __init__(self):
@@ -12,7 +10,6 @@ class DependencyGraph:
 
     def show(self, file_path):
         self.net.show(file_path)
-        logger.info(file_path)
 
     def data_setting(self, dict, filter_words):
         filter_exist = len(filter_words) > 0
