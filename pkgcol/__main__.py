@@ -36,7 +36,7 @@ def get_options():
                         default=False
                         )
 
-    parser.add_argument('-s', '--skip_repository_setting',
+    parser.add_argument('-s', '--skip_setting',
                         action='store_true',
                         required=False,
                         default=False
@@ -53,7 +53,7 @@ def main():
     dict = {}
     for repo in repos:
         path = f'{WORK}/{repo}'
-        if not args.skip_repository_setting:
+        if not args.skip_setting:
             git = GitControl(directory=path, repository=repo)
             git.clone()
             git.pull()

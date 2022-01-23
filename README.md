@@ -19,5 +19,5 @@ optional arguments:
   -r [REPOSITORY_NAMES ...], --repository_names [REPOSITORY_NAMES ...]
   -f [FILTER_WORDS ...], --filter_words [FILTER_WORDS ...]
   -c, --clean
-  -s, --skip_repository_setting
+  -s, --skip_setting
 ```
