@@ -13,7 +13,6 @@ class DependencyGraph:
     def show(self, file_path):
         self.net.show(file_path)
         logger.info(file_path)
-        return 0
 
     def data_setting(self, dict, filter_words):
         filter_exist = len(filter_words) > 0
@@ -25,7 +24,6 @@ class DependencyGraph:
                             nx.add_path(self.g, [repo_name, package_name])
                 else:
                     nx.add_path(self.g, [repo_name, package_name])
-        return 0
 
     def graph_setting(self, scale_num, bgcolor='#FFFFFF', font_color='#000000',
                       notebook=False, directed=True, layout=None,
@@ -37,4 +35,3 @@ class DependencyGraph:
         node_scale.update((x, scale_num * y) for x, y in node_scale.items())
         nx.set_node_attributes(self.g, node_scale, 'size')
         self.net.from_nx(self.g)
-        return 0
