@@ -16,10 +16,10 @@ class DependencyGraph:
         return 0
 
     def data_setting(self, dict, filter_words):
-        filter_exisit = len(filter_words) > 0
+        filter_exist = len(filter_words) > 0
         for repo_name in dict.keys():
             for package_name in dict[repo_name].keys():
-                if filter_exisit:
+                if filter_exist:
                     for word in filter_words:
                         if package_name.find(word) > 0:
                             nx.add_path(self.g, [repo_name, package_name])
