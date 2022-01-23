@@ -51,13 +51,13 @@ def main():
 
     dict = {}
     for repo in repos:
-        directory_path = f'{WORK}/{repo}'
+        path = f'{WORK}/{repo}'
         if not args.skip_repository_setting:
-            git = GitControl(directory=directory_path, repository=repo)
+            git = GitControl(directory=path, repository=repo)
             git.clone()
             git.pull()
 
-        json = PackageJson(file_path=f'{directory_path}/package.json')
+        json = PackageJson(file_path=f'{path}/package.json')
         dict[repo] = json.dependencies_all()
 
         if args.clean:
