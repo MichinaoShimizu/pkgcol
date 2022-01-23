@@ -9,7 +9,7 @@ python3 -m pip install -r requirements.txt
 ## execusion
 
 ```bash
-mbp:pkgcol michinao$ python3 pkgcol -h
+$ python3 pkgcol -h
 usage: pkgcol [-h] -r [REPOSITORY_NAMES ...] [-f [FILTER_WORDS ...]] [-c] [-s]
 
 Visualize repository and package dependencies
