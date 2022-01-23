@@ -8,6 +8,7 @@ from git_control import GitControl
 from package_json import PackageJson
 
 WORK = '.work'
+OUTPUT_FILE = 'dependency_graph.html'
 
 logger = get_module_logger(__name__)
 
@@ -66,7 +67,8 @@ def main():
     graph = DependencyGraph()
     graph.data_setting(dict=dict, filter_words=args.filter_words)
     graph.graph_setting(scale_num=2)
-    graph.show(file_path='dependency_graph.html')
+    graph.show(file_path=OUTPUT_FILE)
+    logger.info(OUTPUT_FILE)
     return 0
 
 

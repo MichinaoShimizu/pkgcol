@@ -1,7 +1,6 @@
 from __future__ import print_function
 import networkx as nx
 from pyvis.network import Network
-from logger import get_module_logger
 
 
 class DependencyGraph:
