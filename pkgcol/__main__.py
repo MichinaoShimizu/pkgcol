@@ -47,11 +47,14 @@ def get_options():
 
 def main():
     args = get_options()
-    repos = args.repository_names
+    if args.clean:
+        shutil.rmtree(WORK)
+        return 0
+
     os.makedirs(WORK, exist_ok=True)
 
     dict = {}
-    for repo in repos:
+    for repo in args.repository_names:
         path = f'{WORK}/{repo}'
         if not args.skip_setting:
             git = GitControl(directory=path, repository=repo)
@@ -60,9 +63,6 @@ def main():
 
         json = PackageJson(file_path=f'{path}/package.json')
         dict[repo] = json.dependencies_all()
-
-        if args.clean:
-            shutil.rmtree(WORK)
 
     graph = DependencyGraph()
     graph.data_setting(dict=dict, filter_words=args.filter_words)
