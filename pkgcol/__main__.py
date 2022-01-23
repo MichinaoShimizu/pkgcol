@@ -46,20 +46,20 @@ def get_options():
 
 def main():
     args = get_options()
-    repo_names = args.repository_names
+    repos = args.repository_names
     os.makedirs(WORK, exist_ok=True)
 
     dict = {}
-    for repo_name in repo_names:
-        directory_path = f'{WORK}/{repo_name}'
+    for repo in repos:
+        directory_path = f'{WORK}/{repo}'
         if not args.skip_repository_setting:
-            git = GitControl(directory=directory_path, repository=repo_name)
+            git = GitControl(directory=directory_path, repository=repo)
             git.clone()
             git.pull()
 
-        package_json_path = f'{directory_path}/package.json'
-        package_json = PackageJson(file_path=package_json_path)
-        dict[repo_name] = package_json.dependencies_all()
+        json = PackageJson(file_path=f'{directory_path}/package.json')
+        dict[repo] = json.dependencies_all()
+
         if args.clean:
             shutil.rmtree(WORK)
 

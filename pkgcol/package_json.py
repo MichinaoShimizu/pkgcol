@@ -10,17 +10,17 @@ class PackageJson:
         with open(file_path) as f:
             self.data = json.load(f)
 
-    def __seek(self, key):
-        return self.data[key] if key in self.data else {}
+    def __seek(self, name, default):
+        return self.data[name] if name in self.data else default
 
     def name(self):
-        return self.__seek('name')
+        return self.__seek('name', '')
 
     def dependencies(self):
-        return self.__seek('dependencies')
+        return self.__seek('dependencies', {})
 
     def dev_dependencies(self):
-        return self.__seek('devDependencies')
+        return self.__seek('devDependencies', {})
 
     def dependencies_all(self):
         a = self.dependencies()
