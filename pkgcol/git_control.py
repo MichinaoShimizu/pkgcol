@@ -15,6 +15,5 @@ class GitControl:
         return subprocess.run(cmd, check=False, shell=True)
 
     def pull(self):
-        cmd = (f'cd {self.directory} && '
-               'git config pull.rebase false && git pull')
+        cmd = f'cd {self.directory} && git pull'
         return subprocess.run(cmd, check=True, shell=True)

@@ -51,7 +51,6 @@ def main():
 
     dict = {}
     for repo_name in repo_names:
-        logger.info(f'target:{repo_name}')
         directory_path = f'{WORK}/{repo_name}'
         if not args.skip_repository_setting:
             git = GitControl(directory=directory_path, repository=repo_name)
@@ -64,10 +63,8 @@ def main():
         if args.clean:
             shutil.rmtree(WORK)
 
-    filter_words = args.filter_words
-
     graph = DependencyGraph(dict=dict)
-    graph.data_setting(filter_words=filter_words)
+    graph.data_setting(filter_words=args.filter_words)
     graph.graph_setting(scale_num=2)
     graph.show(file_path='dependency_graph.html')
     return 0
