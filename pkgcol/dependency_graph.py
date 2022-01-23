@@ -21,12 +21,8 @@ class DependencyGraph:
                 else:
                     nx.add_path(self.g, [repo_name, package_name])
 
-    def graph_setting(self, scale_num, bgcolor='#FFFFFF', font_color='#000000',
-                      notebook=False, directed=True, layout=None,
-                      height='100%', width='100%', heading='Dependency Graph'):
-        self.net = Network(notebook=notebook, directed=directed, layout=layout,
-                           bgcolor=bgcolor, font_color=font_color,
-                           height=height, width=width, heading=heading)
+    def graph_setting(self, scale_num):
+        self.net = Network(directed=True, width='100%', height='100%')
         node_scale = dict(self.g.degree)
         node_scale.update((x, scale_num * y) for x, y in node_scale.items())
         nx.set_node_attributes(self.g, node_scale, 'size')
