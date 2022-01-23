@@ -63,8 +63,8 @@ def main():
         if args.clean:
             shutil.rmtree(WORK)
 
-    graph = DependencyGraph(dict=dict)
-    graph.data_setting(filter_words=args.filter_words)
+    graph = DependencyGraph()
+    graph.data_setting(dict=dict, filter_words=args.filter_words)
     graph.graph_setting(scale_num=2)
     graph.show(file_path='dependency_graph.html')
     return 0

@@ -7,8 +7,7 @@ logger = get_module_logger(__name__)
 
 
 class DependencyGraph:
-    def __init__(self, dict):
-        self.dict = dict
+    def __init__(self):
         self.g = nx.DiGraph()
 
     def show(self, file_path):
@@ -16,10 +15,10 @@ class DependencyGraph:
         logger.info(file_path)
         return 0
 
-    def data_setting(self, filter_words):
+    def data_setting(self, dict, filter_words):
         filter_exisit = len(filter_words) > 0
-        for repo_name in self.dict.keys():
-            for package_name in self.dict[repo_name].keys():
+        for repo_name in dict.keys():
+            for package_name in dict[repo_name].keys():
                 if filter_exisit:
                     for word in filter_words:
                         if package_name.find(word) > 0:
